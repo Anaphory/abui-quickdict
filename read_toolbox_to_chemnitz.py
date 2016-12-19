@@ -7,21 +7,33 @@ parser = argparse.ArgumentParser(description="""Translate a
 parser.add_argument("outfile", default= open('Abui.txt', mode='w', encoding='utf-8'), nargs="?", type=argparse.FileType("w"))
 parser.add_argument("filename", default=open('Abui Dictionary.db', encoding='utf-8'), nargs="?", type=argparse.FileType("r"))
 args = parser.parse_args()
-def tofile(file, abui, indonesion, last_example_abui, last_example_indonesian):
-    if last_example_abui:
-        file.write(abui)
-        file.write(' | ')
-        file.write(last_example_abui)
-        file.write(" :: ")
-        file.write(indonesion)
-        file.write(' | ')
-        file.write(last_example_indonesian)
-        file.write(" \n ")
-    else:
-        file.write(abui)
-        file.write(" :: ")
-        file.write(indonesion)
-        file.write("\n")
+
+
+def tofile(file, abui, indonesian, last_example_abui, last_example_indonesian):
+    """Write lexemes and examples out in Chemnitz-style lines.
+
+    For every pair of translations in the two languages, generate a
+    dictionary entry line. Include all examples that match that
+    particular translation pair.
+
+    """
+    for abui_word.strip("-") in abui.split(", "):
+        for indonesian_word.strip("-") in indonesian.split(", "):
+            if (abui_word in last_example_abui and
+                indonesian_word in last_example_indonesian):
+                file.write(abui_word)
+                file.write(' | ')
+                file.write(last_example_abui)
+                file.write(" :: ")
+                file.write(indonesian_word)
+                file.write(' | ')
+                file.write(last_example_indonesian)
+                file.write(" \n ")
+            else:
+                file.write(abui_word)
+                file.write(" :: ")
+                file.write(indonesian_word)
+                file.write("\n")
 
 
 def line_to_entry(line):
