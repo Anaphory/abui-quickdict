@@ -10,16 +10,16 @@ args = parser.parse_args()
 def tofile(file, abui, indonesion, last_example_abui, last_example_indonesian): 
 	if last_example_abui: 
 		file.write(abui)
-		file.write('|')
+		file.write(' | ')
 		file.write(last_example_abui)
-		file.write("::")
+		file.write(" :: ")
 		file.write(indonesion)
-		file.write('|')
+		file.write(' | ')
 		file.write(last_example_indonesian)
-		file.write("\n")
+		file.write(" \n ")
 	else:
 		file.write(abui)
-		file.write("::")
+		file.write(" :: ")
 		file.write(indonesion)
 		file.write("\n")
 
