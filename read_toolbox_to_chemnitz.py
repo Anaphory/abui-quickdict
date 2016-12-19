@@ -7,21 +7,21 @@ parser = argparse.ArgumentParser(description="""Translate a
 parser.add_argument("outfile", default= open('Abui.txt', mode='w', encoding='utf-8'), nargs="?", type=argparse.FileType("w"))
 parser.add_argument("filename", default=open('Abui Dictionary.db', encoding='utf-8'), nargs="?", type=argparse.FileType("r"))
 args = parser.parse_args()
-def tofile(file, abui, indonesion, last_example_abui, last_example_indonesian): 
-        if last_example_abui: 
-                file.write(abui)
-                file.write(' | ')
-                file.write(last_example_abui)
-                file.write(" :: ")
-                file.write(indonesion)
-                file.write(' | ')
-                file.write(last_example_indonesian)
-                file.write(" \n ")
-        else:
-                file.write(abui)
-                file.write(" :: ")
-                file.write(indonesion)
-                file.write("\n")
+def tofile(file, abui, indonesion, last_example_abui, last_example_indonesian):
+    if last_example_abui:
+        file.write(abui)
+        file.write(' | ')
+        file.write(last_example_abui)
+        file.write(" :: ")
+        file.write(indonesion)
+        file.write(' | ')
+        file.write(last_example_indonesian)
+        file.write(" \n ")
+    else:
+        file.write(abui)
+        file.write(" :: ")
+        file.write(indonesion)
+        file.write("\n")
 
 
 for line in args.filename:
@@ -32,7 +32,7 @@ for line in args.filename:
             tofile(args.outfile, lexeme, definition_indonesian, last_example_abui, last_example_indonesian)
         except NameError:
             pass
-        
+
     if line.startswith(r"\lx"):
         lexeme = line[4:].strip()
     elif line.startswith(r"\dn"):
