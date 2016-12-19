@@ -24,6 +24,16 @@ def tofile(file, abui, indonesion, last_example_abui, last_example_indonesian):
         file.write("\n")
 
 
+def line_to_entry(line):
+    r"""Clean a .db entry line.
+
+    Strip the line from its header (first four characters, '\aa '),
+    any surrounding whitespace, and convert all to lowercase
+
+    """
+    return line[4:].strip().lower()
+
+
 for line in args.filename:
     if line.startswith(r"\lx"):
         # If there was a previous lexeme, it has obviously
@@ -34,13 +44,13 @@ for line in args.filename:
             pass
 
     if line.startswith(r"\lx"):
-        lexeme = line[4:].strip()
+        lexeme = line_to_entry(line)
     elif line.startswith(r"\dn"):
-        definition_indonesian = line[4:].strip()
+        definition_indonesian = line_to_entry(line)
     elif line.startswith(r"\xn"):
-        last_example_indonesian = line[4:].strip()
-    elif line.startswith(r"\xr"):
-        last_example_abui = line[4:].strip()
+        last_example_indonesian = line_to_entry(line)
+    elif line.startswith(r"\xv"):
+        last_example_abui = line_to_entry(line)
 
 tofile(args.outfile, lexeme, definition_indonesian, last_example_abui, last_example_indonesian)
 
